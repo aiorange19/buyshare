@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Buyshare</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+      <header>
+         <div class='header_logo'>
+             <%= link_to('Buy Share', '/') %> 
+         </div>
+          
+            <ul class='header_menus'>
+              <li>
+                <%= link_to('新規登録', '/signup') %>
+              </li>
+              <li>
+                <%= link_to('ログイン', '/login') %>
+              </li>
+            </ul>
+          
+      </header>
+    <%= yield %>
+  </body>
+</html>

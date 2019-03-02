@@ -1,0 +1,20 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* 共通部分 */
+header{
+    width:100%;
+    height:60px;
+    background-color: aquamarine;
+}
+
+.header_logo p{
+    float:left;
+}
+
+.header_menus li{
+    float:right;
+    list-style: none;
+    padding-right:10px;
+}
