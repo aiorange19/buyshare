@@ -17,10 +17,23 @@
           
             <ul class='header_menus'>
               <li>
+                <%= session[:user_id] %>
+              </li>
+              <li>
+                <%= link_to('buyshareとは', '/about') %>
+              </li>
+              <li>
+                <%= link_to('使い方', '/how_to') %>
+              </li>
+              <li>
                 <%= link_to('新規登録', '/signup') %>
               </li>
               <li>
                 <%= link_to('ログイン', '/login') %>
+              </li>
+              <li>
+                <%= link_to('ログアウト', '/logout', {method: :post}) %> <!--ルーティングでpost指定のためリンク指定の際、{method: :post}をつける -->
+                  
               </li>
             </ul>
           

@@ -9,12 +9,18 @@ header{
     background-color: aquamarine;
 }
 
-.header_logo p{
+.header_logo{
     float:left;
+    line-height: 60px;
+    padding-left: 10px;
+}
+
+.header_menus{
+    float:right;
 }
 
 .header_menus li{
-    float:right;
+    float:left;
     list-style: none;
     padding-right:10px;
 }
