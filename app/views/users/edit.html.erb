@@ -1,0 +1,17 @@
+<%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %> <!-- 画像を送信するので{multipart: true}が必要 -->
+  
+  <h2>画像</h2>
+  <input name='image' type='file'>
+
+  <h2>ユーザー名</h2>
+  <input name='name'>
+
+  <h2>メールアドレス</h2>
+  <input name='email'>
+
+  <h2>パスワード</h2>
+  <input name='password' type='password'>
+
+  <input type='submit' value='変更'>
+
+<% end %>

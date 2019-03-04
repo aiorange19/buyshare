@@ -16,9 +16,11 @@
          </div>
           
             <ul class='header_menus'>
+            <% if @current_user %>
               <li>
-                <%= session[:user_id] %>
+                <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
               </li>
+            <% end %>
               <li>
                 <%= link_to('buyshareとは', '/about') %>
               </li>
