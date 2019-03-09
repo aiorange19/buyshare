@@ -1,10 +1,10 @@
 <div>
   <div>新規登録</div>
   
- <%= form_tag('/users/create') do %> <!--form_tagメソッドでフォームの送信先を指定 -->
+ <%= form_tag('/users/create') do %>
   <div class='form'>
     <p>ユーザー名</p>
-      <input name='name' value="<%= @user.name %>"> <!--valueで初期値を設定。@userはusersコントローラーのcreateアクションで定義 -->
+      <input name='name' value="<%= @user.name %>"> 
    
     <p>メールアドレス</p>
       <input name='email' value="<%= @user.email %>">
