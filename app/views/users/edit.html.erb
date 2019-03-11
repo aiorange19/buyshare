@@ -1,16 +1,21 @@
-<%= form_tag("/users/#{@user.id}/update", {multipart: true}) do %> 
-  <h2>画像</h2>
-  <input name='image' type='file'>
+<div>
+  <div>登録内容変更</div>
+    
+<%= form_with model: @user do |f| %> 
+  <p><%= f.label :image, '画像' %></p>
+     <%= f.file_field :image %>
 
-  <h2>ユーザー名</h2>
-  <input name='name' value="<%= @user.name %>">
+  <p><%= f.label :name, 'ユーザー名' %></p>
+      <%= f.text_field :name %>
 
-  <h2>メールアドレス</h2>
-  <input name='email' value="<%= @user.email %>">
+      <p><%= f.label :email, 'メールアドレス' %></p>
+      <%= f.email_field :email %>
 
-  <h2>パスワード</h2>
-  <input name='password' type='password'>
+      <p><%= f.label :password, 'パスワード' %></p>
+      <%= f.password_field :password %>
 
-  <input type='submit' value='変更'>
+      <%= f.submit "変更" %>
 
 <% end %>
+    
+</div>

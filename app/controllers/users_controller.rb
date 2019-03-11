@@ -9,17 +9,16 @@ class UsersController < ApplicationController
 
   def create
      @user = User.new(
-         name: params[:name],
-         email: params[:email],
-         password: params[:password],
-         image_name: 'sample.jpg'
-         )
+         name: params[:user][:name],
+         email: params[:user][:email],
+         password: params[:user][:password],
+         image_name: 'sample.jpg')
 
       if @user.save
         session[:user_id] = @user.id
-        redirect_to("/users/#{@user.id}") 
+        redirect_to("/users/#{@user.id}")
       else
-        render("users/new.html.erb")
+        render('users/new.html.erb')
       end
 
   end
@@ -30,13 +29,13 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    @user.name = params[:name]
-    @user.email = params[:email]
-    @user.password = params[:password]
+    @user.name = params[:user][:name]
+    @user.email = params[:user][:email]
+    @user.password = params[:user][:password]
       
-    if params[:image]
+    if params[:user][:image]
       @user.image_name = "#{@user.id}.jpg" 
-      image = params[:image]
+      image = params[:user][:image]
       File.binwrite("public/user_images/#{@user.image_name}", image.read)
     end
       
@@ -69,6 +68,6 @@ class UsersController < ApplicationController
     session[:user_id] = nil
     redirect_to('/login')
   end
-
-
+    
+    
 end
