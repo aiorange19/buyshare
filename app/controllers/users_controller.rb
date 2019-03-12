@@ -29,9 +29,6 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    @user.name = params[:user][:name]
-    @user.email = params[:user][:email]
-    @user.password = params[:user][:password]
       
     if params[:user][:image]
       @user.image_name = "#{@user.id}.jpg" 
@@ -39,7 +36,7 @@ class UsersController < ApplicationController
       File.binwrite("public/user_images/#{@user.image_name}", image.read)
     end
       
-    if @user.save
+    if @user.update(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password])
         redirect_to("/users/#{@user.id}")
     else
         render('users/edit.html.erb')
