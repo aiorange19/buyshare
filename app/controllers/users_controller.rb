@@ -14,13 +14,12 @@ class UsersController < ApplicationController
          password: params[:user][:password],
          image_name: 'sample.jpg')
 
-      if @user.save
-        session[:user_id] = @user.id
-        redirect_to("/users/#{@user.id}")
-      else
-        render('users/new.html.erb')
-      end
-
+    if @user.save
+      session[:user_id] = @user.id
+      redirect_to("/users/#{@user.id}")
+    else
+      render('users/new.html.erb')
+    end 
   end
 
   def edit
@@ -40,8 +39,7 @@ class UsersController < ApplicationController
         redirect_to("/users/#{@user.id}")
     else
         render('users/edit.html.erb')
-    end
-      
+    end  
   end
 
   def login_form
@@ -57,14 +55,12 @@ class UsersController < ApplicationController
       @email = params[:email]
       @password = params[:password]
       render('users/login_form.html.erb') 
-    end
-
+    end  
   end
 
   def logout
     session[:user_id] = nil
     redirect_to('/login')
-  end
-    
+  end 
     
 end
