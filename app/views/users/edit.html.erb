@@ -1,7 +1,11 @@
 <div>
   <div>登録内容変更</div>
     
-<%= form_with model: @user do |f| %> 
+<%= form_with model: @user, local: true do |f| %> 
+  <% @user.errors.full_messages.each do |message| %>
+    <li><%= message %></li>
+  <% end %>
+    
   <p><%= f.label :image, '画像' %></p>
      <%= f.file_field :image %>
 

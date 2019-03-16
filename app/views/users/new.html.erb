@@ -1,19 +1,22 @@
 <div>
   <div>新規登録</div>
-  
-
-  <%= form_with model: @user do |f| %>
+    
+  <%= form_with model: @user, local: true do |f| %>
     <div class='form'>
-     <p><%= f.label :name, 'ユーザー名' %></p>
-      <%= f.text_field :name %>
+       <% @user.errors.full_messages.each do |message| %>
+         <li><%= message %></li>
+       <% end %>
+        
+       <p><%= f.label :name, 'ユーザー名' %></p>
+       <%= f.text_field :name %>
 
-      <p><%= f.label :email, 'メールアドレス' %></p>
-      <%= f.email_field :email %>
+       <p><%= f.label :email, 'メールアドレス' %></p>
+       <%= f.email_field :email %>
 
-      <p><%= f.label :password, 'パスワード' %></p>
-      <%= f.password_field :password %>
+       <p><%= f.label :password, 'パスワード' %></p>
+       <%= f.password_field :password %>
 
-      <%= f.submit "新規登録" %>
+       <%= f.submit "新規登録" %>
     </div>
    <% end %>  
 

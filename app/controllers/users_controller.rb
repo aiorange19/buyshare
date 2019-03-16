@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 
     if @user.save
       session[:user_id] = @user.id
+      flash[:notice] = 'ユーザー登録が完了しました。'
       redirect_to("/users/#{@user.id}")
     else
       render('users/new.html.erb')
@@ -36,6 +37,7 @@ class UsersController < ApplicationController
     end
       
     if @user.update(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password])
+        flash[:notice] = "ユーザー情報を編集しました"
         redirect_to("/users/#{@user.id}")
     else
         render('users/edit.html.erb')
@@ -50,8 +52,10 @@ class UsersController < ApplicationController
 
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      flash[:notice] = "ログインしました"
       redirect_to("/users/#{@user.id}") #仮。タイムライン画面できたらそっちにする
     else
+      @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]
       @password = params[:password]
       render('users/login_form.html.erb') 
@@ -60,6 +64,7 @@ class UsersController < ApplicationController
 
   def logout
     session[:user_id] = nil
+    flash[:notice] = "ログアウトしました"
     redirect_to('/login')
   end 
     
