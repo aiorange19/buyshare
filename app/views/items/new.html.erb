@@ -1,0 +1,20 @@
+<div>
+  <div>投稿する</div>
+    
+  <%= form_with model: @item, local: true do |f| %>
+    <div class='form'>
+        
+       <p><%= f.label :content, '商品説明' %></p>
+       <%= f.text_area :content %>
+        
+       <p><%= f.label :buy_place, '購入場所' %></p>
+       <%= f.text_field :buy_place %>
+        
+       <p><%= f.label :price, '価格' %></p>
+       <%= f.text_field :price %>円
+
+       <%= f.submit "投稿" %>
+    </div>
+   <% end %>  
+
+</div>

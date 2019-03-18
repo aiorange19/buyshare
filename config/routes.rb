@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-       
+  get 'items/index'
+  resources :items
+    
   resources :users,:only => [:update, :edit, :create, :show]
   get 'signup' => 'users#new'
   get 'login' => 'users#login_form'
