@@ -1,13 +1,12 @@
 Rails.application.routes.draw do
-  
-  post 'users/:id/update' => 'users#update'
-  get 'users/:id/edit' => 'users#edit'
-  get  'signup' => 'users#new'
-  post 'users/create' => 'users#create'
+  get 'items/index'
+  resources :items
+    
+  resources :users,:only => [:update, :edit, :create, :show]
+  get 'signup' => 'users#new'
   get 'login' => 'users#login_form'
   post 'login' => 'users#login'
   post 'logout' => 'users#logout'
-  get 'users/:id' => 'users#show'
     
   get '/' => 'home#top'
   get 'about' => 'home#about'

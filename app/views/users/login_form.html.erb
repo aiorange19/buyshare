@@ -1,6 +1,8 @@
 <div>
   <div>ログイン</div>
-  
+  <% if @error_message %>
+    <%= @error_message %>
+  <% end %>
  <%= form_tag("/login") do %>
   <div class="form">
     <p>メールアドレス</p>

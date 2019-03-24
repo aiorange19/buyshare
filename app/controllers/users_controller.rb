@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find_by(id: params[:id]) #ユーザー情報をidから取得
+    @user = User.find_by(id: params[:id]) 
   end
 
   def new
@@ -9,18 +9,18 @@ class UsersController < ApplicationController
 
   def create
      @user = User.new(
-         name: params[:name],
-         email: params[:email],
-         password_digest: params[:password],
-         image_name: 'sample.jpg'
-         ) #ユーザー情報を作り出す。要素は上記の通り。sample.jpgをデフォルト画像となるよう設定
+         name: params[:user][:name],
+         email: params[:user][:email],
+         password: params[:user][:password],
+         image_name: 'sample.jpg')
 
-      if @user.save
-        redirect_to("/users/#{@user.id}") #ユーザー新規登録ができた場合「ユーザー詳細画面」に飛ぶ
-      else
-        render("users/new.html.erb") #うまく登録できなかった場合「新規登録画面」に戻る
-      end
-
+    if @user.save
+      session[:user_id] = @user.id
+      flash[:notice] = 'ユーザー登録が完了しました。'
+      redirect_to("/users/#{@user.id}")
+    else
+      render('users/new.html.erb')
+    end 
   end
 
   def edit
@@ -29,45 +29,43 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find_by(id: params[:id])
-    @user.name = params[:name]
-    @user.email = params[:email]
-    @user.password_digest = params[:password]
       
-    if params[:image]
+    if params[:user][:image]
       @user.image_name = "#{@user.id}.jpg" 
-      image = params[:image]
+      image = params[:user][:image]
       File.binwrite("public/user_images/#{@user.image_name}", image.read)
     end
       
-    if @user.save
+    if @user.update(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password])
+        flash[:notice] = "ユーザー情報を編集しました"
         redirect_to("/users/#{@user.id}")
     else
         render('users/edit.html.erb')
-    end
-      
+    end  
   end
 
   def login_form
   end
 
   def login
-    @user = User.find_by(email: params[:email], password_digest: params[:password]) #ユーザー情報をメアドとパスワードから抽出
+    @user = User.find_by(email: params[:email])
 
-    if @user
+    if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
+      flash[:notice] = "ログインしました"
       redirect_to("/users/#{@user.id}") #仮。タイムライン画面できたらそっちにする
     else
+      @error_message = "メールアドレスまたはパスワードが間違っています"
       @email = params[:email]
       @password = params[:password]
-      render('users/login_form.html.erb') #うまく登録できなかった場合「ログイン画面」に戻る
-    end
-
+      render('users/login_form.html.erb') 
+    end  
   end
 
   def logout
     session[:user_id] = nil
+    flash[:notice] = "ログアウトしました"
     redirect_to('/login')
-  end
-
-
+  end 
+    
 end
