@@ -13,6 +13,7 @@ class ItemsController < ApplicationController
     
   def new
     @item = Item.new
+    @item_image = @item.images.build
   end
     
   def create
@@ -38,6 +39,6 @@ class ItemsController < ApplicationController
  private
     
   def item_params
-      params.require(:item).permit(:content, :buy_place, :price)
+      params.require(:item).permit(:content, :buy_place, :price, images_attributes: {image_name: []})
   end
 end

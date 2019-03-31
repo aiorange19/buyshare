@@ -11,5 +11,6 @@ class Item < ApplicationRecord
   has_many :item_categories
   has_many :categories, through: :item_categories
   has_many :images
+  accepts_nested_attributes_for :images
 
 end
