@@ -16,12 +16,7 @@ class ItemsController < ApplicationController
   end
     
   def create
-    @item = Item.new(
-        content: params[:item][:content],
-        buy_place: params[:item][:buy_place],
-        price: params[:item][:price],
-        user_id: @current_user.id
-        )
+    @item = set_current_user.items.build(item_params)
       
     if @item.save
       flash[:notice] = "投稿を作成しました"
@@ -39,5 +34,10 @@ class ItemsController < ApplicationController
     
   def destroy
   end
+  
+ private
     
+  def item_params
+      params.require(:item).permit(:content, :buy_place, :price)
+  end
 end

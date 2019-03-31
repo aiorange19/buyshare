@@ -5,7 +5,13 @@
         <%= link_to(@user.name, "/users/#{@user.id}") %>
       </p>
       <p>
-        <%= @item.content %>
+        商品説明：<%= @item.content %>
+      </p>
+      <p>
+        購入場所：<%= @item.buy_place %>
+      </p>
+      <p>
+        価格：<%= @item.price %>
       </p>
       <div class="item-time">
         <%= @item.created_at.strftime("%Y-%m-%d %H:%M") %>
