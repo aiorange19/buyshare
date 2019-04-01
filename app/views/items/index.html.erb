@@ -2,10 +2,10 @@
   <div class="container">
       <% @items.each do |item| %>
       <div class="items-index-content">
-        <p><%= link_to(item.user.name, "/users/#{item.user.id}") %></p>
-        <p>商品説明：<%= link_to(item.content, "/items/#{item.id}") %></p>
-        <p>購入場所：<%= link_to(item.buy_place, "/items/#{item.id}") %></p>
-        <p>価格：<%= link_to(item.price, "/items/#{item.id}") %></p>
+        <p><%= link_to(item.user.name, user_path(item.user.id)) %></p>
+        <p>商品説明：<%= link_to(item.content, item_path(item.id)) %></p>
+        <p>購入場所：<%= link_to(item.buy_place, item_path(item.id)) %></p>
+        <p>価格：<%= link_to(item.price, item_path(item.id)) %></p>
       </div>
     <% end %>
   </div>

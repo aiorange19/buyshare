@@ -17,7 +17,7 @@ class ItemsController < ApplicationController
   end
     
   def create
-    @item = set_current_user.items.build(item_params)
+    @item = @current_user.items.build(item_params)
       
     if @item.save
       flash[:notice] = "投稿を作成しました"
