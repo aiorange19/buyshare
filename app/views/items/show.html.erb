@@ -5,6 +5,12 @@
         <%= link_to(@user.name, user_path(@user.id)) %>
       </p>
       <p>
+        画像<br>
+        <% @item.images.each do |image| %>
+          <img src="<%= "/uploads/image/image_name/#{image.id}/something.jpg" %>">
+        <% end %>
+      </p>
+      <p>
         商品説明：<%= @item.content %>
       </p>
       <p>

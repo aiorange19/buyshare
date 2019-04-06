@@ -1,6 +1,6 @@
 <div>
   <div>投稿する</div>
-    
+　
   <%= form_with model: @item, local: true do |f| %>
     <div class='form'>
         
@@ -12,14 +12,12 @@
         
        <p><%= f.label :price, '価格' %></p>
        <%= f.text_field :price %>円
-        
-        <%= f.fields_for :images do |image| %>
-          <p><%= image.label :image_name, '画像' %></p>
-           <%= image.file_field :image_name, multiple: true %>
-        　　<%= image.file_field :image_name, multiple: true %>
-        　　<%= image.file_field :image_name, multiple: true %>
-        <% end %>
       
+        <%= f.fields_for :images do |i| %>
+          <p><%= i.label :image_name, '画像' %></p>
+          <%= i.file_field :image_name, multiple: true %>
+        <% end %>
+        
         <%= f.submit '投稿' %>
     </div>
    <% end %>  
