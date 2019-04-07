@@ -10,7 +10,13 @@
            <% end %>
         </p>
         <p>商品説明：<%= link_to(item.content, item_path(item.id)) %></p>
-        <p>購入場所：<%= link_to(item.buy_place, item_path(item.id)) %></p>
+        <p>
+          <% if item.buy_place == "" %>
+            購入場所：<%= link_to("購入場所不明", item_path(item.id)) %>
+          <% else %>
+            購入場所：<%= link_to(item.buy_place, item_path(item.id)) %>
+          <% end %>
+        </p>
         <p>価格：<%= link_to(item.price, item_path(item.id)) %></p>
       </div>
     <% end %>
