@@ -2,7 +2,13 @@
   <div class="container">
       <% @items.each do |item| %>
       <div class="items-index-content">
-        <p><%= link_to(item.user.name, user_path(item.user.id)) %></p>
+        <p><%= link_to(item.user.name, user_path(item.user.id)) %>
+        <p><% item.images.each do |image| %>
+             <% if image.main_image == "true" %>
+                <img src="<%= "/uploads/image/image_name/#{image.id}/item_image.jpg" %>" >
+             <% end %>
+           <% end %>
+        </p>
         <p>商品説明：<%= link_to(item.content, item_path(item.id)) %></p>
         <p>購入場所：<%= link_to(item.buy_place, item_path(item.id)) %></p>
         <p>価格：<%= link_to(item.price, item_path(item.id)) %></p>
