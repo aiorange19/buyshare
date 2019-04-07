@@ -21,9 +21,9 @@ class ItemsController < ApplicationController
     
     @item.images.each_with_index do |image, i|
         if i == 0
-            image.main_image = "true"
+            image.main_image = true
         else
-            image.main_image = "false"
+            image.main_image = false
         end
     end
 
