@@ -29,7 +29,6 @@ class ItemsController < ApplicationController
 
     if @item.save
       flash[:notice] = "投稿を作成しました"
-        binding.pry
       redirect_to("/items/index")
     else
       render("items/new")

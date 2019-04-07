@@ -14,7 +14,7 @@
         商品説明：<%= @item.content %>
       </p>
       <p>
-        <% if @item.buy_place == "" %>
+        <% if @item.buy_place.blank? %>
           購入場所：購入場所不明
         <% else %>
           購入場所：<%= @item.buy_place %>
