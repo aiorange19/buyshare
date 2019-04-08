@@ -4,7 +4,7 @@
       <div class="items-index-content">
         <p><%= link_to(item.user.name, user_path(item.user.id)) %>
         <p><% item.images.each do |image| %>
-             <% if image.main_image == true %>
+             <% if image.main_image? %>
                 <img src="<%= "/uploads/image/image_name/#{image.id}/item_image.jpg" %>" >
              <% end %>
            <% end %>
