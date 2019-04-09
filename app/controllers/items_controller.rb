@@ -13,16 +13,20 @@ class ItemsController < ApplicationController
     
   def new
     @item = Item.new
+    @item.images.build
   end
     
   def create
-    @item = Item.new(
-        content: params[:item][:content],
-        buy_place: params[:item][:buy_place],
-        price: params[:item][:price],
-        user_id: @current_user.id
-        )
-      
+    @item = @current_user.items.build(item_params)
+    
+    @item.images.each_with_index do |image, i|
+        if i == 0
+            image.main_image = true
+        else
+            image.main_image = false
+        end
+    end
+
     if @item.save
       flash[:notice] = "投稿を作成しました"
       redirect_to("/items/index")
@@ -39,5 +43,10 @@ class ItemsController < ApplicationController
     
   def destroy
   end
+  
+ private
     
+  def item_params
+      params.require(:item).permit(:content, :buy_place, :price, images_attributes: {image_name: []})
+  end
 end

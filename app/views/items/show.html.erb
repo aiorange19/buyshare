@@ -2,10 +2,26 @@
   <div class="container">
     <div class="items-show-content">
       <p>
-        <%= link_to(@user.name, "/users/#{@user.id}") %>
+        <%= link_to(@user.name, user_path(@user.id)) %>
       </p>
       <p>
-        <%= @item.content %>
+        画像<br>
+        <% @item.images.each do |image| %>
+          <img src="<%= "/uploads/image/image_name/#{image.id}/item_image.jpg" %>" >
+        <% end %>
+      </p>
+      <p>
+        商品説明：<%= @item.content %>
+      </p>
+      <p>
+        <% if @item.buy_place.blank? %>
+          購入場所：購入場所不明
+        <% else %>
+          購入場所：<%= @item.buy_place %>
+        <% end %>
+      </p>
+      <p>
+        価格：<%= @item.price %>
       </p>
       <div class="item-time">
         <%= @item.created_at.strftime("%Y-%m-%d %H:%M") %>

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   get 'items/index'
-  resources :items
+  resources :items do
+    resources :images
+  end
     
   resources :users,:only => [:update, :edit, :create, :show]
   get 'signup' => 'users#new'
