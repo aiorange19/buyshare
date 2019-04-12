@@ -14,7 +14,7 @@
        <%= f.text_field :price %>円
         
         <%= f.fields_for :images do |i| %>
-          <p><%= i.label :image_name, 'MAIN画像' %></p>
+          <p><%= i.label :image_name, 'メイン画像' %></p>
           <%= i.file_field :image_name, multiple: true %>
         <% end %>
       
