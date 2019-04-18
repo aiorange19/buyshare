@@ -13,6 +13,13 @@
        <p><%= f.label :price, '価格' %></p>
        <%= f.text_field :price %>円
         
+       <% @item.images.each do |image| %>
+         <%= f.fields_for :images, image do |image_fields| %>
+           <p>メイン画像</p>
+           <%= image_fields.file_field :image_name %>
+         <% end %>
+      <% end %>
+        
         <%= f.submit '投稿を変更' %>
     </div>
    <% end %>  

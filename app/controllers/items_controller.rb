@@ -46,7 +46,7 @@ class ItemsController < ApplicationController
         flash[:notice] = '投稿を編集しました'
         redirect_to(item_path(@item.id))
     else
-        render(edit_user_path(@user.id))
+        render('items/edit')
     end  
   end
     
