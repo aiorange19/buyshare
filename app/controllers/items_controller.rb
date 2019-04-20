@@ -37,11 +37,13 @@ class ItemsController < ApplicationController
    
   def edit
     @item = Item.find(params[:id])
+    @images = @item.images
   end
     
   def update
     @item = Item.find(params[:id])
-      
+    @images = @item.images
+   
     if @item.update(item_update_params)
         flash[:notice] = '投稿を編集しました'
         redirect_to(item_path(@item.id))
@@ -79,6 +81,6 @@ class ItemsController < ApplicationController
   end
     
   def item_update_params
-      params.require(:item).permit(:content, :buy_place, :price)
+      params.require(:item).permit(:content, :buy_place, :price, :image_name)
   end
 end

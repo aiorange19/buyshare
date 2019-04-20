@@ -3,24 +3,40 @@
 　
   <%= form_with model: @item, local: true do |f| %>
     <div class='form'>
-        
+      <div class = 'form_content'>
        <p><%= f.label :content, '商品説明' %></p>
        <%= f.text_area :content %>
-        
+      </div>
+       
+      <div class = 'form_content'>
        <p><%= f.label :buy_place, '購入場所' %></p>
        <%= f.text_field :buy_place %>
+      </div>
         
+      <div class = 'form_content'>
        <p><%= f.label :price, '価格' %></p>
        <%= f.text_field :price %>円
+      </div>
         
-       <% @item.images.each do |image| %>
-         <%= f.fields_for :images, image do |image_fields| %>
-           <p>メイン画像</p>
-           <%= image_fields.file_field :image_name %>
+      <div class = 'form_content'>
+       <%= f.fields_for :images do |image| %>
+         <% if image.index == 0 %>
+           <p><%= image.label :image_name, 'メイン画像' %></p>
+           <p><img src= "<%= "/uploads/image/image_name/#{image.object.id}/item_image.jpg" %>" width='10%'></p>
+           <%= image.file_field :image_name %>
+           <%= image.hidden_field :image_name_cache %>
+        <p><%= image.check_box :remove_image_name %>画像を削除する</p><br>
+         <% else %>
+           <p><%= image.label :image_name, '画像' %></p>
+           <p><img src= "<%= "/uploads/image/image_name/#{image.object.id}/item_image.jpg" %>" width='10%'></p>
+           <%= image.file_field :image_name %>
+           <p><%= image.check_box :remove_image_name %>画像を削除する</p><br>
          <% end %>
-      <% end %>
+       <% end %>
+          
+          <%= f.submit '投稿を変更' %>
+      </div>
         
-        <%= f.submit '投稿を変更' %>
     </div>
    <% end %>  
 
