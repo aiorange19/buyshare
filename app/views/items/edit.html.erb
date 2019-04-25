@@ -20,18 +20,19 @@
         
       <div class = 'form_content'>
        <%= f.fields_for :images do |image| %>
-         <% if image.index == 0 %>
-           <p><%= image.label :image_name, 'メイン画像' %></p>
-           <p><img src= "<%= "/uploads/image/image_name/#{image.object.id}/item_image.jpg" %>" width='10%'></p>
-           <%= image.file_field :image_name %>
-           <%= image.hidden_field :image_name_cache %>
-        <p><%= image.check_box :remove_image_name %>画像を削除する</p><br>
-         <% else %>
-           <p><%= image.label :image_name, '画像' %></p>
-           <p><img src= "<%= "/uploads/image/image_name/#{image.object.id}/item_image.jpg" %>" width='10%'></p>
-           <%= image.file_field :image_name %>
-           <p><%= image.check_box :remove_image_name %>画像を削除する</p><br>
-         <% end %>
+        <% if image.index == 0 %>
+          <p><%= image.label :image_name, 'メイン画像' %></p>
+        <% else %>
+          <p><%= image.label :image_name, '画像' %></p>
+        <% end %>
+
+          <%= image.file_field :image_name, multiple: true, type: 'file', name: "images[image_name]" %>
+          
+        <% if image.index == 0 %>
+          <%= image.hidden_field :main_image, value: true %>
+        <% else %>
+          <%= image.hidden_field :main_image, value: false %>
+        <% end %>
        <% end %>
           
           <%= f.submit '投稿を変更' %>

@@ -16,9 +16,8 @@ class ItemsController < ApplicationController
     @item.images.build
   end
     
-  def create
+   def create
     @item = @current_user.items.build(item_params)
-    
     @item.images.each_with_index do |image, i|
         if i == 0
             image.main_image = true
@@ -26,7 +25,7 @@ class ItemsController < ApplicationController
             image.main_image = false
         end
     end
-
+       
     if @item.save
       flash[:notice] = "投稿を作成しました"
       redirect_to("/items/index")
@@ -36,14 +35,11 @@ class ItemsController < ApplicationController
   end    
    
   def edit
-    @item = Item.find(params[:id])
-    @images = @item.images
   end
     
   def update
-    @item = Item.find(params[:id])
-    @images = @item.images
-   
+    @item = Item.find(params[:id])  
+  
     if @item.update(item_update_params)
         flash[:notice] = '投稿を編集しました'
         redirect_to(item_path(@item.id))
@@ -77,10 +73,11 @@ class ItemsController < ApplicationController
  private
     
   def item_params
-      params.require(:item).permit(:content, :buy_place, :price, images_attributes: {image_name: []})
+      params.require(:item).permit(:content, :buy_place, :price, images_attributes: [:id, {image_name: []}, :main_image])
   end
     
-  def item_update_params
-      params.require(:item).permit(:content, :buy_place, :price, :image_name)
+   def item_update_params
+      params.require(:item).permit(:content, :buy_place, :price, images_attributes: [:id, :image_name, {image_name: []}])
   end
+  
 end
