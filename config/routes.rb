@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'items/index'
-  resources :items do
+  get '/items/index' => 'items#index'
+  resources :items, :except =>[:index] do
     resources :images
   end
     

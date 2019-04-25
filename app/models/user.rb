@@ -13,4 +13,8 @@ class User < ApplicationRecord
   has_many :comments
   has_many :wants
     
+  def has_item?(item)
+    id == item.user_id
+  end
+    
 end

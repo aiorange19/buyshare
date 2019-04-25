@@ -1,0 +1,44 @@
+<div>
+  <div>投稿を編集する</div>
+　
+  <%= form_with model: @item, local: true do |f| %>
+    <div class='form'>
+      <div class = 'form_content'>
+       <p><%= f.label :content, '商品説明' %></p>
+       <%= f.text_area :content %>
+      </div>
+       
+      <div class = 'form_content'>
+       <p><%= f.label :buy_place, '購入場所' %></p>
+       <%= f.text_field :buy_place %>
+      </div>
+        
+      <div class = 'form_content'>
+       <p><%= f.label :price, '価格' %></p>
+       <%= f.text_field :price %>円
+      </div>
+        
+      <div class = 'form_content'>
+       <%= f.fields_for :images do |image| %>
+        <% if image.index == 0 %>
+          <p><%= image.label :image_name, 'メイン画像' %></p>
+        <% else %>
+          <p><%= image.label :image_name, '画像' %></p>
+        <% end %>
+
+          <%= image.file_field :image_name, multiple: true, type: 'file', name: "images[image_name]" %>
+          
+        <% if image.index == 0 %>
+          <%= image.hidden_field :main_image, value: true %>
+        <% else %>
+          <%= image.hidden_field :main_image, value: false %>
+        <% end %>
+       <% end %>
+          
+          <%= f.submit '投稿を変更' %>
+      </div>
+        
+    </div>
+   <% end %>  
+
+</div>

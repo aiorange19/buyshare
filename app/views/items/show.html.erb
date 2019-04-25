@@ -23,6 +23,14 @@
       <p>
         価格：<%= @item.price %>
       </p>
+        
+        <% if @current_user.has_item?(@item) %>
+          <div class="post-menus">
+            <%= link_to("編集", edit_item_path(@item.id)) %>
+            <%= link_to("削除", "/items/#{@item.id}", {method: "delete"}) %>
+          </div>
+        <% end %>
+      
       <div class="item-time">
         <%= @item.created_at.strftime("%Y-%m-%d %H:%M") %>
       </div>
