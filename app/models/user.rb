@@ -15,6 +15,5 @@ class User < ApplicationRecord
     
   def has_item?(item)
     id == item.user_id
-  end
-    
+  end   
 end
