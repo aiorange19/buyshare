@@ -1,7 +1,13 @@
 Rails.application.routes.draw do
-  get '/items/index' => 'items#index'
+  post "wants/:item_id/create" => "wants#create"
+  post "wants/:item_id/destroy" => "wants#destroy"
+  
+  post "likes/:item_id/create" => "likes#create"
+  post "likes/:item_id/destroy" => "likes#destroy"
+    
+  get 'items/index' => 'items#index'
   resources :items, :except =>[:index] do
-    resources :images
+    resources :images 
   end
     
   resources :users,:only => [:update, :edit, :create, :show]
@@ -9,6 +15,8 @@ Rails.application.routes.draw do
   get 'login' => 'users#login_form'
   post 'login' => 'users#login'
   post 'logout' => 'users#logout'
+  get 'users/:id/likes' => 'users#likes'
+  get 'users/:id/wants' => 'users#wants'
     
   get '/' => 'home#top'
   get 'about' => 'home#about'
