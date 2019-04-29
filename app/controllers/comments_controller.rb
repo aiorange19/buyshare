@@ -1,20 +1,19 @@
 class CommentsController < ApplicationController
   def create
-    @comment = Comment.new(comment_params)
-    @comment.user_id = @current_user.id
+    @comment = @current_user.comments.new(comment_params)
     @comment.item_id = params[:item_id]
       
     if @comment.save
-      redirect_to("/items/#{params[:item_id]}")
+      redirect_to(item_path(params[:item_id]))
     else
-      render template: "items/show"
+      render :template => "items/show"
     end
 
   end
     
   def destroy
     @comment = Comment.find(params[:id]).destroy
-    redirect_to("/items/#{params[:item_id]}")
+    redirect_to(item_path(params[:item_id]))
   end
 
   private
