@@ -6,9 +6,9 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to(item_path(params[:item_id]))
     else
-      render :template => "items/show"
+      flash[:notice] = 'コメントは1文字以上150文字以内で入力してください'
+      redirect_to(item_path(params[:item_id]))
     end
-
   end
     
   def destroy
