@@ -59,15 +59,21 @@
     </div>
       <br>
       <h2>コメント一覧</h2><br>
+        <% @comment.errors.full_messages.each do |mes| %>
+          <li><%= mes %></li>
+        <% end %>
+      
         <% @comments.each do |c| %>
           <div>
             <p><a href="/users/<%= c.user_id %>"><img src="<%= "/user_images/#{c.user.image_name}" %>" width='30' height='30'>&emsp;<%= c.user.name %></a></p>
             <p><%= c.content %></p>
-            <p><% if c.user_id == @current_user.id %>
-                    <%= link_to item_comment_path(@item,c), method: :delete do %>
-                      <span>コメント削除</span>
-                    <% end %>
-                <% end %></p>
+            <p>
+              <% if @current_user.has_comment?(c) %>
+                <%= link_to item_comment_path(@item,c), method: :delete do %>
+                  <span>コメント削除</span>
+                <% end %>
+              <% end %>
+            </p>
             <hr>
           </div>
         <% end %>
