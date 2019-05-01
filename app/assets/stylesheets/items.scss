@@ -132,6 +132,15 @@
    opacity: 0.5;
 }
 
+.comment_error{
+    padding: 0.5em 1em;
+    font-weight: bold;
+    color: red;
+}
+
+.comment{
+    margin-top:2em;
+}
 /* items/edit ================================ */
 .items-edit-content img {
   width: 60px;

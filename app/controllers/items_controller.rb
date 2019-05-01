@@ -9,6 +9,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find_by(id: params[:id])
     @user = @item.user
+    @images = @item.images
       
     @likes_count = Like.where(item_id: @item.id).count
     @wants_count = Want.where(item_id: @item.id).count

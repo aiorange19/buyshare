@@ -58,11 +58,14 @@
         <% end %>
     </div>
       <br>
-      <h2>コメント一覧</h2><br>
-        <% @comment.errors.full_messages.each do |mes| %>
-          <li><%= mes %></li>
+      <h2>コメント一覧</h2>
+        <% @comment.errors.full_messages.each do |message| %>
+         <div class="comment_error">
+          <li><%= message %></li>
+         </div>
         <% end %>
       
+        <div class="comment">
         <% @comments.each do |c| %>
           <div>
             <p><a href="/users/<%= c.user_id %>"><img src="<%= "/user_images/#{c.user.image_name}" %>" width='30' height='30'>&emsp;<%= c.user.name %></a></p>
@@ -80,8 +83,8 @@
 
         <%= form_with model:[@item, @comment], local: true do |f| %>
           <%= f.text_field :content %>
-          <br>
           <%= f.submit 'コメントする' %>
         <% end %>
+      </div>
   </div>
 </div>

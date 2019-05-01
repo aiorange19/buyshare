@@ -6,6 +6,10 @@ class CommentsController < ApplicationController
     if @comment.save
       redirect_to(item_path(params[:item_id]))
     else
+      @item = Item.find_by(id: params[:item_id])
+      @user = @item.user
+      @comments = @item.comments
+        
       render 'items/show'
     end
   end
