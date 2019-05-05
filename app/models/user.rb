@@ -21,4 +21,3 @@ class User < ApplicationRecord
     id == comment.user_id
  end
 end
-
