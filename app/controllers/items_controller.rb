@@ -75,7 +75,7 @@ class ItemsController < ApplicationController
  private
     
   def item_params
-      params.require(:item).permit(:content, :buy_place, :price, images_attributes: [:id, {image_name: []}, :main_image])
+      params.require(:item).permit(:content, :buy_place, :price, images_attributes: [:id, {image_name: []}, :main_image], tag_list: [])
   end
     
    def item_update_params

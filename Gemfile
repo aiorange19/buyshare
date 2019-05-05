@@ -67,3 +67,5 @@ gem 'bcrypt'
 gem 'rails-i18n'
 
 gem 'carrierwave'
+
+gem 'acts-as-taggable-on'
