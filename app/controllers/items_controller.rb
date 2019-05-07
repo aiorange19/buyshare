@@ -27,6 +27,7 @@ class ItemsController < ApplicationController
         else
             image.main_image = false
         end
+    end
        
     if @item.save
       flash[:notice] = "投稿を作成しました"
@@ -47,7 +48,7 @@ class ItemsController < ApplicationController
         redirect_to(item_path(@item.id))
     else
         render('items/edit')
-    end  
+    end
   end
     
   def destroy
@@ -63,7 +64,7 @@ class ItemsController < ApplicationController
       
   end
     
-　def ensure_correct_user
+ def ensure_correct_user
      @item = Item.find_by(id: params[:id])
      
      unless @current_user.has_item?(@item)
@@ -75,7 +76,7 @@ class ItemsController < ApplicationController
  private
     
   def item_params
-      params.require(:item).permit(:content, :buy_place, :price, images_attributes: [:id, {image_name: []}, :main_image], tag_list: [])
+    params.require(:item).permit(:content, :buy_place, :price, images_attributes: [:id, {image_name: []}, :main_image])
   end
     
    def item_update_params
