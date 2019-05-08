@@ -15,5 +15,9 @@ class User < ApplicationRecord
     
   def has_item?(item)
     id == item.user_id
-  end   
+  end
+    
+ def has_comment?(comment)
+    id == comment.user_id
+ end
 end
