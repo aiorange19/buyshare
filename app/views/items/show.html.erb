@@ -23,6 +23,12 @@
       <p>
         価格：<%= @item.price %>
       </p>
+      <p>
+        カテゴリー：
+        <% @item.categories.each do |category| %>
+          <%= category.name %>
+        <% end %>
+      </p>
         
          <% if Like.find_by(user_id: @current_user.id, item_id: @item.id) %>
            <%= link_to("/likes/#{@item.id}/destroy", {method: "post"}) do %>

@@ -18,6 +18,13 @@
        <%= f.text_field :price %>円
       </div>
         
+      <div class="item-tags-field">
+        <%= f.label "カテゴリ" %>
+        <ul id="item-tags">
+        </ul>
+        <%= hidden_field_tag :category_hidden,@category_list %>
+      </div>
+
       <div class = 'form_content'>
        <%= f.fields_for :images do |image| %>
         <% if image.index == 0 %>

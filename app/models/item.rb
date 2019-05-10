@@ -9,10 +9,11 @@ class Item < ApplicationRecord
   has_many :comments
   has_many :wants
   has_many :images
-  accepts_nested_attributes_for :images
 
-  has_many :categories, through: :item_categories
   has_many :item_categories, dependent: :destroy
+  has_many :categories, through: :item_categories
+
+  accepts_nested_attributes_for :images
 
   def save_categories(tags)
     current_tags = self.categories.pluck(:name) unless self.categories.nil?
@@ -30,5 +31,5 @@ class Item < ApplicationRecord
       self.categories << article_category
     end
   end
-  
+
 end
