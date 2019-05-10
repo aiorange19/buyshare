@@ -13,6 +13,12 @@
         <p><%= f.label :price, '価格' %></p>
         <%= f.text_field :price %>円
 
+        <div class="item-tags-field">
+            <%= f.label "カテゴリー" %>
+            <ul id="item-tags">
+            </ul>
+        </div> 
+
         <%= f.fields_for :images do |i| %>
           <p><%= i.label :image_name, 'メイン画像' %></p>
           <%= i.file_field :image_name, multiple: true %>
