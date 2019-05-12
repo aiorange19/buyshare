@@ -1,67 +1,100 @@
-<div class="main items-show">
-  <div class="container">
-    <div class="items-show-content">
-      <p>
-        <%= link_to(@user.name, user_path(@user.id)) %>
-      </p>
-      <p>
-        画像<br>
-        <% @item.images.each do |image| %>
-          <img src="<%= "/uploads/image/image_name/#{image.id}/item_image.jpg" %>" >
-        <% end %>
-      </p>
-      <p>
-        商品説明：<%= @item.content %>
-      </p>
-      <p>
-        <% if @item.buy_place.blank? %>
-          購入場所：購入場所不明
-        <% else %>
-          購入場所：<%= @item.buy_place %>
-        <% end %>
-      </p>
-      <p>
-        価格：<%= @item.price %>
-      </p>
-      <p>
-        カテゴリー：
-        <% @item.categories.each do |category| %>
-          <%= category.name %>
-        <% end %>
-      </p>
-        
-         <% if Like.find_by(user_id: @current_user.id, item_id: @item.id) %>
-           <%= link_to("/likes/#{@item.id}/destroy", {method: "post"}) do %>
-             <span class="fas fa-thumbs-up like-btn-unlike"></span>
-           <% end %>
-        <% else %>
-          <%= link_to("/likes/#{@item.id}/create", {method: "post"}) do %>
-             <span class="fas fa-thumbs-up like-btn"></span>
-          <% end %>
-        <% end %>
-        <%= @likes_count %>
-        
-        <% if Want.find_by(user_id: @current_user.id, item_id: @item.id) %>
-           <%= link_to("/wants/#{@item.id}/destroy", {method: "post"}) do %>
-             <span class="fas fa-shopping-bag want-btn-unlike"></span>
-           <% end %>
-        <% else %>
-          <%= link_to("/wants/#{@item.id}/create", {method: "post"}) do %>
-             <span class="fas fa-shopping-bag want-btn"></span>
-          <% end %>
-        <% end %>
-        <%= @wants_count %>
-      
-      <div class="item-time">
-        <%= @item.created_at.strftime("%Y-%m-%d %H:%M") %>
-      </div>
-        
-      <% if @current_user.has_item?(@item) %>
-        <div class="item-menus">
-           <%= link_to("編集", edit_item_path(@item.id)) %>
-           <%= link_to("削除", "/items/#{@item.id}", {method: "delete"}) %>
+<div class="main items-show">   <div class="container">
+        <div class="items-show-content">
+            <p>
+                <%= link_to(@user.name, user_path(@user.id)) %>
+            </p>
+            <p>
+                画像<br>
+                <% @item.images.each do |image| %>
+                    <%= image_tag "/uploads/image/image_name/#{image.id}/item_image.jpg" %>
+                <% end %>
+            </p>
+            <p>
+                商品説明：<%= @item.content %>
+            </p>
+            <p>
+                <% if @item.buy_place.blank? %>
+                購入場所：購入場所不明
+                <% else %>
+                購入場所：<%= @item.buy_place %>
+                <% end %>
+            </p>
+            <p>
+                価格：<%= @item.price %>
+            </p>
+
+            <p>
+                カテゴリー：
+                <% @item.categories.each do |category| %>
+                <%= category.name %>
+                <% end %>
+            </p>
+            
+            <% if Like.find_by(user_id: @current_user.id, item_id: @item.id) %>
+                <%= link_to("/likes/#{@item.id}/destroy", {method: "post"}) do %>
+                    <span class="fas fa-thumbs-up like-btn-unlike"></span>
+                <% end %>
+            <% else %>
+                <%= link_to("/likes/#{@item.id}/create", {method: "post"}) do %>
+                    <span class="fas fa-thumbs-up like-btn"></span>
+                <% end %>
+            <% end %>
+            <%= @likes_count %>
+                
+            <% if Want.find_by(user_id: @current_user.id, item_id: @item.id) %>
+                <%= link_to("/wants/#{@item.id}/destroy", {method: "post"}) do %>
+                    <span class="fas fa-shopping-bag want-btn-unlike"></span>
+                <% end %>
+            <% else %>
+                <%= link_to("/wants/#{@item.id}/create", {method: "post"}) do %>
+                    <span class="fas fa-shopping-bag want-btn"></span>
+                <% end %>
+            <% end %>
+            <%= @wants_count %>
+            
+            <div class="item-time">
+                <%= @item.created_at.strftime("%Y-%m-%d %H:%M") %>
+            </div>
+                
+            <% if @current_user.has_item?(@item) %>
+                <div class="item-menus">
+                    <%= link_to("編集", edit_item_path(@item.id)) %>
+                    <%= link_to("削除", "/items/#{@item.id}", {method: "delete"}) %>
+                </div>
+            <% end %>
         </div>
-        <% end %>
+            <br>
+            <h2>コメント一覧</h2>
+                <% @comment.errors.full_messages.each do |message| %>
+                <div class="comment_error">
+                <li><%= message %></li>
+                </div>
+                <% end %>
+
+                <div class="comment">
+                    <% @comments.each do |comment| %>
+                        <div>
+                            <%= link_to("/users/#{comment.user_id}") do %>
+                                <%= image_tag "/user_images/#{comment.user.image_name}", size: '30x30' %>
+                                &emsp;<%= comment.user.name %>
+                            <% end %>
+                            
+                            <p><%= comment.content %></p>
+                            <p>
+                            <% if @current_user.has_comment?(comment) %>
+                                <%= link_to item_comment_path(@item, comment), method: :delete do %>
+                                <span>コメント削除</span>
+                                <% end %>
+                            <% end %>
+                            </p>
+                            <hr>
+                        </div>
+                    <% end %>
+
+                    <%= form_with model:[@item, @comment], local: true do |f| %>
+                    <%= f.text_field :content %>
+                    <%= f.submit 'コメントする' %>
+                    <% end %>
+                </div>
     </div>
-  </div>
 </div>

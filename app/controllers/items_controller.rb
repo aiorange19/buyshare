@@ -12,6 +12,9 @@ class ItemsController < ApplicationController
       
     @likes_count = Like.where(item_id: @item.id).count
     @wants_count = Want.where(item_id: @item.id).count
+      
+    @comments = @item.comments
+    @comment = Comment.new
   end
     
   def new

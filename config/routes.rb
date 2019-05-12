@@ -7,7 +7,8 @@ Rails.application.routes.draw do
     
   get 'items/index' => 'items#index'
   resources :items, :except =>[:index] do
-    resources :images 
+    resources :images
+    resources :comments, only: [:create, :destroy]
   end
     
   resources :users,:only => [:update, :edit, :create, :show]
