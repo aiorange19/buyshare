@@ -67,3 +67,7 @@ gem 'bcrypt'
 gem 'rails-i18n'
 
 gem 'carrierwave'
+
+gem 'jquery-rails'
+
+gem 'jquery-ui-rails'
