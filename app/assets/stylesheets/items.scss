@@ -141,6 +141,10 @@
 .comment{
     margin-top:2em;
 }
+
+.ui-helper-hidden-accessible {
+    display: none;
+  }
 /* items/edit ================================ */
 .items-edit-content img {
   width: 60px;
