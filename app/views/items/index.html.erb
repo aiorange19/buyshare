@@ -18,7 +18,15 @@
           <% end %>
         </p>
         <p>価格：<%= link_to(item.price, item_path(item.id)) %></p>
+
+        <% if item.categories.present? %>
+            <p>カテゴリー：
+                <% item.categories.each do |category| %>
+                    <%= category.name %>
+                <% end %>
+            </p>
+        <% end %>
       </div>
     <% end %>
   </div>
-</div>
+  

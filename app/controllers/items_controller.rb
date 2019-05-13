@@ -24,14 +24,18 @@ class ItemsController < ApplicationController
     
    def create
     @item = @current_user.items.build(item_params)
+    category_list = params[:category_list].split(",")
+
     @item.images.each_with_index do |image, i|
         if i == 0
             image.main_image = true
         else
             image.main_image = false
         end
+    end
        
     if @item.save
+      @item.save_categories(category_list)
       flash[:notice] = "投稿を作成しました"
       redirect_to("/items/index")
     else
@@ -40,12 +44,16 @@ class ItemsController < ApplicationController
   end    
    
   def edit
+    @category_list = @item.categories.pluck(:name).join(",")
   end
     
   def update
     @item = Item.find(params[:id])  
+
+    category_list = params[:category_list].split(",")
   
     if @item.update(item_update_params)
+        @item.save_categories(category_list)
         flash[:notice] = '投稿を編集しました'
         redirect_to(item_path(@item.id))
     else
@@ -66,7 +74,7 @@ class ItemsController < ApplicationController
       
   end
     
-　def ensure_correct_user
+ def ensure_correct_user
      @item = Item.find_by(id: params[:id])
      
      unless @current_user.has_item?(@item)
