@@ -4,6 +4,9 @@ class ItemsController < ApplicationController
     
   def index
     @items = Item.all.order(created_at: :desc)
+
+    @search = Item.ransack(params[:q])
+    @result = @search.result(distinct: true).order(created_at: :desc)
   end
    
   def show
@@ -81,6 +84,9 @@ class ItemsController < ApplicationController
       flash[:notice] = "権限がありません"
       redirect_to(items_path)
      end
+ end
+
+ def search_results
  end
     
  private

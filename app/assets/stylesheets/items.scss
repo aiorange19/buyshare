@@ -42,6 +42,19 @@
   text-align: left;
 }
 
+.search{
+    margin-bottom: 3em;
+}
+
+.search h2{
+    text-align: center;
+}
+
+.error_message{
+    text-align: center;
+    font-size: 2em;
+    margin-bottom: 2em;
+}
 /* items/show ================================ */
 .items-show form {
   display: inline;

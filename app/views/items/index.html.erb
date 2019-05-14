@@ -1,32 +1,101 @@
 <div class="main items-index">
-  <div class="container">
-      <% @items.each do |item| %>
-      <div class="items-index-content">
-        <p><%= link_to(item.user.name, user_path(item.user.id)) %>
-        <p><% item.images.each do |image| %>
-             <% if image.main_image? %>
-                <img src="<%= "/uploads/image/image_name/#{image.id}/item_image.jpg" %>" >
-             <% end %>
-           <% end %>
-        </p>
-        <p>商品説明：<%= link_to(item.content, item_path(item.id)) %></p>
-        <p>
-          <% if item.buy_place.blank? %>
-            購入場所：<%= link_to("購入場所不明", item_path(item.id)) %>
-          <% else %>
-            購入場所：<%= link_to(item.buy_place, item_path(item.id)) %>
-          <% end %>
-        </p>
-        <p>価格：<%= link_to(item.price, item_path(item.id)) %></p>
+    <div class="container">
+        <div class="search">
+            <h2>検索</h2>
+            <%= search_form_for @search, url: items_index_path do |search| %>
+                <div class="search_content">
+                    <%= search.label :user_name_cont, "ユーザー名" %>
+                    <%= search.search_field :user_name_cont %>
+                </div>
 
-        <% if item.categories.present? %>
-            <p>カテゴリー：
-                <% item.categories.each do |category| %>
-                    <%= category.name %>
-                <% end %>
-            </p>
-        <% end %>
-      </div>
+                <div class="search_content">
+                    <%= search.label :content_cont, "内容" %>
+                    <%= search.search_field :content_cont %>
+                </div>
+
+                <div class="search_content">
+                    <%= search.label :buy_place_cont, "購入場所" %>
+                    <%= search.search_field :buy_place_cont %>
+                </div>
+
+                <div class="search_content">
+                    <%= search.label :price_gteq, "価格" %>
+                    <%= search.search_field :price_gteq %>
+                    <%= "円以上〜" %>
+                    <%= search.search_field :price_lt %>
+                    <%= "円未満" %>
+                </div>
+
+                <div class="search_content">
+                    <%= search.label :categories_name_cont, "カテゴリー" %>
+                    <%= search.search_field :categories_name_cont %>
+                </div>
+
+                <%= search.submit "検索" %>
+            <% end %>
+        </div>
+        <% if @result.present? %>
+            <% @result.each do |r| %>
+                <div class="items-index-content">
+                    <p><%= link_to(r.user.name, user_path(r.user.id)) %></p>
+                    <p>
+                        <% r.images.each do |image| %>
+                            <% if image.main_image? %>
+                                <img src="<%= "/uploads/image/image_name/#{image.id}/item_image.jpg" %>" >
+                            <% end %>
+                        <% end %>
+                    </p>
+                    <p>内容：<%= link_to(r.content, item_path(r.id)) %></p>
+                    <p>
+                        <% if r.buy_place.blank? %>
+                            購入場所：<%= link_to("購入場所不明", item_path(r.id)) %>
+                        <% else %>
+                            購入場所：<%= link_to(r.buy_place, item_path(r.id)) %>
+                        <% end %>
+                    </p>
+                    <p>価格：<%= link_to(r.price, item_path(r.id)) %></p>
+
+                    <% if r.categories.present? %>
+                        <p>カテゴリー：
+                            <% r.categories.each do |category| %>
+                                <%= category.name %>
+                            <% end %>
+                        </p>
+                    <% end %>
+                </div>
+            <% end %>
+        <% else %>
+            <p class="error_message">検索結果なし</p>
+            <% @items.each do |item| %>
+                <div class="items-index-content">
+
+                    <p><%= link_to(item.user.name, user_path(item.user.id)) %></p>
+                    <p>
+                        <% item.images.each do |image| %>
+                            <% if image.main_image? %>
+                                <img src="<%= "/uploads/image/image_name/#{image.id}/item_image.jpg" %>" >
+                            <% end %>
+                        <% end %>
+                    </p>
+                    <p>内容：<%= link_to(item.content, item_path(item.id)) %></p>
+                    <p>
+                        <% if item.buy_place.blank? %>
+                            購入場所：<%= link_to("購入場所不明", item_path(item.id)) %>
+                        <% else %>
+                            購入場所：<%= link_to(item.buy_place, item_path(item.id)) %>
+                        <% end %>
+                    </p>
+                    <p>価格：<%= link_to(item.price, item_path(item.id)) %></p>
+
+                    <% if item.categories.present? %>
+                        <p>カテゴリー：
+                            <% item.categories.each do |category| %>
+                                <%= category.name %>
+                            <% end %>
+                        </p>
+                    <% end %>
+                </div>
+            <% end %>
     <% end %>
-  </div>
-  
+    </div>
+</div>
