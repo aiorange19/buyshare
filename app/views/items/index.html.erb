@@ -1,39 +1,44 @@
 <div class="main items-index">
     <div class="container">
         <div class="search">
-            <h2>検索</h2>
-            <%= search_form_for @search, url: items_index_path do |search| %>
-                <div class="search_content">
-                    <%= search.label :user_name_cont, "ユーザー名" %>
-                    <%= search.search_field :user_name_cont %>
-                </div>
+            <div onclick="obj=document.getElementById('open').style; obj.display=(obj.display=='none')?'block':'none';">
+                <a style="cursor:pointer;"><h2>▼ 検索</h2></a>
+            </div>
+            <div id="open" style="display:none;clear:both;">
+                <%= search_form_for @search, url: items_index_path do |search| %>
+                    <div class="search_content">
+                        <%= search.label :user_name_cont, "ユーザー名" %>
+                        <%= search.search_field :user_name_cont %>
+                    </div>
 
-                <div class="search_content">
-                    <%= search.label :content_cont, "内容" %>
-                    <%= search.search_field :content_cont %>
-                </div>
+                    <div class="search_content">
+                        <%= search.label :content_cont, "内容" %>
+                        <%= search.search_field :content_cont %>
+                    </div>
 
-                <div class="search_content">
-                    <%= search.label :buy_place_cont, "購入場所" %>
-                    <%= search.search_field :buy_place_cont %>
-                </div>
+                    <div class="search_content">
+                        <%= search.label :buy_place_cont, "購入場所" %>
+                        <%= search.search_field :buy_place_cont %>
+                    </div>
 
-                <div class="search_content">
-                    <%= search.label :price_gteq, "価格" %>
-                    <%= search.search_field :price_gteq %>
-                    <%= "円以上〜" %>
-                    <%= search.search_field :price_lt %>
-                    <%= "円未満" %>
-                </div>
+                    <div class="search_content">
+                        <%= search.label :price_gteq, "価格" %>
+                        <%= search.search_field :price_gteq %>
+                        <%= "円以上〜" %>
+                        <%= search.search_field :price_lt %>
+                        <%= "円未満" %>
+                    </div>
 
-                <div class="search_content">
-                    <%= search.label :categories_name_cont, "カテゴリー" %>
-                    <%= search.search_field :categories_name_cont %>
-                </div>
+                    <div class="search_content">
+                        <%= search.label :categories_name_cont, "カテゴリー" %>
+                        <%= search.search_field :categories_name_cont %>
+                    </div>
 
-                <%= search.submit "検索" %>
-            <% end %>
+                    <%= search.submit "検索" %>
+                <% end %>
+            </div>
         </div>
+        
         <% if @result.present? %>
             <% @result.each do |r| %>
                 <div class="items-index-content">
@@ -41,7 +46,7 @@
                     <p>
                         <% r.images.each do |image| %>
                             <% if image.main_image? %>
-                                <img src="<%= "/uploads/image/image_name/#{image.id}/item_image.jpg" %>" >
+                                <%= image_tag "/uploads/image/image_name/#{image.id}/item_image.jpg" %>
                             <% end %>
                         <% end %>
                     </p>
@@ -73,7 +78,7 @@
                     <p>
                         <% item.images.each do |image| %>
                             <% if image.main_image? %>
-                                <img src="<%= "/uploads/image/image_name/#{image.id}/item_image.jpg" %>" >
+                                <%= image_tag "/uploads/image/image_name/#{image.id}/item_image.jpg" %>
                             <% end %>
                         <% end %>
                     </p>
