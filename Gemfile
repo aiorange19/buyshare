@@ -71,3 +71,7 @@ gem 'carrierwave'
 gem 'jquery-rails'
 
 gem 'jquery-ui-rails'
+
+gem "ransack"
+
+gem 'execjs'

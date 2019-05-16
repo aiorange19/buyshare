@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   post "likes/:item_id/destroy" => "likes#destroy"
     
   get 'items/index' => 'items#index'
+  get 'items/search_results' => 'items#search_results'
   resources :items, :except =>[:index] do
     resources :images
     resources :comments, only: [:create, :destroy]
