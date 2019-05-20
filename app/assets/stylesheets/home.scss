@@ -41,6 +41,7 @@ body {
   min-height: 1vh;
 }
 
+
 .main {
   position: absolute;
   top: 64px;
@@ -60,26 +61,75 @@ body {
 
 /* ヘッダー */
 header{
+    position: absolute;
     width:100%;
     height:60px;
-    background-color: aquamarine;
+    background: -moz-linear-gradient(65deg, #48d1cc, rgb(175, 243, 223)); 
+    background: -webkit-linear-gradient(65deg, #48d1cc, rgb(175, 243, 223)); 
+    background: linear-gradient(25deg, #48d1cc, rgb(175, 243, 223)); 
+    z-index: 1;
 }
 
 .header_logo{
     float:left;
-    line-height: 60px;
     padding-left: 10px;
+    position: relative;
+    text-align: center;
+}
+
+.header_logo img{
+    position: absolute;
+    top: 8px;
+    height:50px;
 }
 
 .header_menus{
     float:right;
 }
 
+ul.header_menus {
+    margin-right: 1em;
+}
+
 .header_menus li{
     float:left;
     list-style: none;
     padding-right:10px;
+    font-weight: bold;
 }
+
+/* TOPページ ================================ */
+.top-main {
+    padding: 200px 0 100px;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: auto;
+    min-height: 100%;
+    color: white;
+    background-color: #3ecdc6;
+    background-repeat: no-repeat;
+    background-position: center 50%;
+    background-size: cover;
+    background-image: url("/assets/top.jpg");
+  }
+  
+  .top-message {
+    position: relative;
+  }
+  
+  .top-main h2 {
+    font-size: 70px;
+    font-weight: 500;
+    line-height: 1.3;
+    -webkit-font-smoothing: antialiased;
+    margin-bottom: 20px;
+  }
+  
+  .top-main p {
+    font-size: 24px;
+  }
 
 /* フラッシュ ================================ */
 .flash {

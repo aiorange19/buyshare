@@ -14,7 +14,9 @@
   <body>
       <header>
          <div class='header_logo'>
-             <%= link_to('Buy Share', '/') %> 
+             <%= link_to '/' do %>
+               <%= image_tag 'Logo.png' %>
+            <% end %>
          </div>
           
             <ul class='header_menus'>
@@ -22,9 +24,7 @@
                     <li>
                         <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
                     </li>
-                    <li>
-                        <%= link_to('使い方', '/how_to') %>
-                    </li>
+                    
                     <li>
                         <%= link_to('ログアウト', '/logout', {method: :post}) %>
                     </li>
@@ -38,9 +38,7 @@
                     <li>
                         <%= link_to('buyshareとは', '/about') %>
                     </li>
-                    <li>
-                        <%= link_to('使い方', '/how_to') %>
-                    </li>
+                    
                     <li>
                         <%= link_to('新規登録', '/signup') %>
                     </li>
@@ -48,6 +46,9 @@
                         <%= link_to('ログイン', '/login') %>
                     </li>
                 <% end %>
+                    <li>
+                        <%= link_to('使い方', '/how_to') %>
+                    </li>
             </ul>
           
       </header>
