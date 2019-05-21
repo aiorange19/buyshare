@@ -1,25 +1,26 @@
-<div>
-  <div>登録内容変更</div>
-    
-<%= form_with model: @user, local: true do |f| %> 
-  <% @user.errors.full_messages.each do |message| %>
-    <li><%= message %></li>
-  <% end %>
-    
-  <p><%= f.label :image, '画像' %></p>
-     <%= f.file_field :image %>
+<div class="main">
+    <div class="container">
+        <div><h2>登録内容変更</h2></div>
+            
+            <%= form_with model: @user, local: true do |f| %> 
+            <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+            <% end %>
+                
+            <p><%= f.label :image, '画像' %></p>
+                <%= f.file_field :image %>
 
-  <p><%= f.label :name, 'ユーザー名' %></p>
-      <%= f.text_field :name %>
+            <p><%= f.label :name, 'ユーザー名' %></p>
+                <%= f.text_field :name %>
 
-      <p><%= f.label :email, 'メールアドレス' %></p>
-      <%= f.email_field :email %>
+                <p><%= f.label :email, 'メールアドレス' %></p>
+                <%= f.email_field :email %>
 
-      <p><%= f.label :password, 'パスワード' %></p>
-      <%= f.password_field :password %>
+                <p><%= f.label :password, 'パスワード' %></p>
+                <%= f.password_field :password %>
 
-      <%= f.submit "変更" %>
+                <%= f.submit "変更" %>
 
-<% end %>
-    
+            <% end %>
+    </div>
 </div>

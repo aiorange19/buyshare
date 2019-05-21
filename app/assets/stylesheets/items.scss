@@ -17,7 +17,6 @@
 .item-left img {
   width: 50px;
   height: 50px;
-  border-radius: 40%;
   box-shadow: 0 2px 6px #c1ced7;
   object-fit: cover;
 }
@@ -68,8 +67,7 @@
 }
 
 .items-show-content img {
-  width: 60px;
-  border-radius: 40%;
+  width: 30%;
   box-shadow: 0 2px 6px #c1ced7;
   vertical-align: middle;
 }
@@ -168,4 +166,59 @@
 
 .form_content{
     margin-bottom: 1em;
+}
+
+/* search ================================ */
+.search_bottom h2{
+    margin: auto;
+    color: #67c5ff;
+    width: 20%;
+    border: solid 2px;
+}
+
+form#item_search {
+    margin-top: 2em;
+    border: solid 0.5px #67c5ff;
+    padding: 1em;
+}
+
+.search_content {
+    margin-bottom: 0.5em;
+}
+
+input#q_user_name_cont {
+    margin-left: 2em;
+}
+
+input#q_content_cont {
+    margin-left: 6.3em;
+}
+
+input#q_buy_place_cont {
+    margin-left: 3.3em;
+}
+
+input#q_price_gteq {
+    margin-left: 6.2em;
+}
+
+input#q_categories_name_cont {
+    margin-left: 1.8em;
+}
+
+form#item_search {
+    margin-top: 2em;
+}
+
+input[type="submit"] {
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    text-decoration: none;
+    color: #00BCD4;
+    background: #ECECEC;
+    transition: .4s;
+    width: 15%;
+    height: 2em;
+    font-size: 15px;
 }
