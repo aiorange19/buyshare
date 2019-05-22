@@ -1,41 +1,43 @@
-<div>
-  <div>投稿する</div>
-　
-  <%= form_with model: @item, local: true do |f| %>
-    <div class='form'>
-        
-       <p><%= f.label :content, '内容' %></p>
-        <%= f.text_area :content %>
+<div class="main">
+    <div class="container">
+    <div><h2>投稿する</h2></div>
+    　
+    <%= form_with model: @item, local: true do |f| %>
+        <div class='form'>
+            
+        <p><%= f.label :content, '内容' %></p>
+            <%= f.text_area :content %>
 
-        <p><%= f.label :buy_place, '購入場所' %></p>
-        <%= f.text_field :buy_place %>
+            <p><%= f.label :buy_place, '購入場所' %></p>
+            <%= f.text_field :buy_place %>
 
-        <p><%= f.label :price, '価格' %></p>
-        <%= f.text_field :price %>円
+            <p><%= f.label :price, '価格' %></p>
+            <%= f.text_field :price %>円
 
-        <div class="item-tags-field">
-            <%= f.label "カテゴリー" %>
-            <ul id="item-tags">
-            </ul>
-        </div> 
+            <div class="item-tags-field">
+                <%= f.label "カテゴリー" %>
+                <ul id="item-tags">
+                </ul>
+            </div> 
+            
+            <%= f.fields_for :images do |i| %>
+            <p><%= i.label :image_name, 'メイン画像' %></p>
+            <%= i.file_field :image_name, multiple: true %>
+            <% end %>
         
-        <%= f.fields_for :images do |i| %>
-          <p><%= i.label :image_name, 'メイン画像' %></p>
-          <%= i.file_field :image_name, multiple: true %>
-        <% end %>
-      
-        <%= f.fields_for :images do |i2| %>
-          <p><%= i2.label :image_name, '画像' %></p>
-          <%= i2.file_field :image_name, multiple: true %>
-        <% end %>
-        
-        <%= f.fields_for :images do |i3| %>
-          <p><%= i3.label :image_name, '画像' %></p>
-          <%= i3.file_field :image_name, multiple: true %>
-        <% end %>
-        
-        <%= f.submit '投稿' %>
+            <%= f.fields_for :images do |i2| %>
+            <p><%= i2.label :image_name, '画像' %></p>
+            <%= i2.file_field :image_name, multiple: true %>
+            <% end %>
+            
+            <%= f.fields_for :images do |i3| %>
+            <p><%= i3.label :image_name, '画像' %></p>
+            <%= i3.file_field :image_name, multiple: true %>
+            <% end %>
+            
+            <%= f.submit '投稿' %>
+        </div>
+    <% end %>  
+
     </div>
-   <% end %>  
-
 </div>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     
   resources :users,:only => [:update, :edit, :create, :show]
   get 'signup' => 'users#new'
+  get 'users' => 'users#new'
   get 'login' => 'users#login_form'
   post 'login' => 'users#login'
   post 'logout' => 'users#logout'
