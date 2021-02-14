@@ -1,4 +1,18 @@
 Rails.application.routes.draw do
+  devise_for :users
+  get '/' => 'home#top'
+  get 'about' => 'home#about'
+  get 'how_to' => 'home#how_to'
+
+  # resources :users,:only => [:update, :edit, :create, :show]
+  # get 'signup' => 'users#new'
+  # get 'users' => 'users#new'
+  # get 'login' => 'users#login_form'
+  # post 'login' => 'users#login'
+  # post 'logout' => 'users#logout'
+  # get 'users/:id/likes' => 'users#likes'
+  # get 'users/:id/wants' => 'users#wants'
+
   post "wants/:item_id/create" => "wants#create"
   post "wants/:item_id/destroy" => "wants#destroy"
   
@@ -12,17 +26,5 @@ Rails.application.routes.draw do
     resources :comments, only: [:create, :destroy]
   end
     
-  resources :users,:only => [:update, :edit, :create, :show]
-  get 'signup' => 'users#new'
-  get 'users' => 'users#new'
-  get 'login' => 'users#login_form'
-  post 'login' => 'users#login'
-  post 'logout' => 'users#logout'
-  get 'users/:id/likes' => 'users#likes'
-  get 'users/:id/wants' => 'users#wants'
-    
-  get '/' => 'home#top'
-  get 'about' => 'home#about'
-  get 'how_to' => 'home#how_to'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
