@@ -7,3 +7,7 @@ ja:
         name: 名前
         email: メールアドレス
         password: パスワード
+        password_confirmation: パスワードの確認
+        image: プロフィール画像
+        current_password: 現在のパスワード
+        remember_me: ログインを維持する
