@@ -13,12 +13,12 @@ gem 'puma'
 gem 'sass-rails'
 
 gem 'devise'
+gem 'carrierwave'
+gem 'mini_magick'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
-gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
@@ -54,8 +54,6 @@ gem 'tzinfo-data'
 gem 'bcrypt'
 
 gem 'rails-i18n'
-
-gem 'carrierwave'
 
 gem 'jquery-rails'
 

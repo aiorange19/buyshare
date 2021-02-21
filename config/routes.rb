@@ -1,8 +1,12 @@
 Rails.application.routes.draw do
-  devise_for :users
   get '/' => 'home#top'
   get 'about' => 'home#about'
   get 'how_to' => 'home#how_to'
+
+  devise_for :users, controllers: {
+    registrations: 'users/registrations'
+  }
+  resources :users,:only => [:show]
 
   # resources :users,:only => [:update, :edit, :create, :show]
   # get 'signup' => 'users#new'

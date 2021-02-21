@@ -2,7 +2,7 @@
     <div class="container">
         <div class="items-show-content">
             <p>
-                <%= link_to(@user.name, user_path(@user.id)) %>
+                <%= link_to(current_user.name, user_path(current_user.id)) %>
             </p>
             <p>
                 画像<br>

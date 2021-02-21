@@ -15,18 +15,18 @@
       <header>
          <div class='header_logo'>
              <%= link_to '/' do %>
-               <%# image_tag 'Logo.png' %>
+               <%= image_tag 'Logo.png' %>
             <% end %>
          </div>
           
             <ul class='header_menus'>
-                <% if @current_user %>
+                <% if user_signed_in? %>
                     <li>
-                        <%= link_to(@current_user.name, "/users/#{@current_user.id}") %>
+                        <%= link_to(current_user.name, "/users/#{current_user.id}") %>
                     </li>
                     
                     <li>
-                        <%= link_to('ログアウト', '/logout', {method: :post}) %>
+                        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
                     </li>
                     <li>
                         <%= link_to('投稿一覧', '/items/index') %>
@@ -40,10 +40,10 @@
                     </li>
                     
                     <li>
-                        <%= link_to('新規登録', '/signup') %>
+                        <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
                     </li>
                     <li>
-                        <%= link_to('ログイン', '/login') %>
+                        <%= link_to "ログイン", new_user_session_path, class: 'post' %>
                     </li>
                 <% end %>
                     <li>
@@ -56,6 +56,12 @@
       <div class='flash'>
         <%= flash[:notice] %>
       </div>
+    <% end %>
+    <% if flash[:notice] %>
+      <div class="alert alert-notice"><%= flash[:notice] %></div>
+    <% end %>
+    <% if flash[:alert] %>
+      <div class="alert alert-error"><%= flash[:alert] %></div>
     <% end %>
     <%= yield %>
   </body>

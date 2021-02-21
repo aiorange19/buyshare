@@ -3,71 +3,6 @@ class UsersController < ApplicationController
     @user = User.find_by(id: params[:id]) 
   end
 
-  def new
-    @user = User.new
-  end
-
-  def create
-     @user = User.new(
-         name: params[:user][:name],
-         email: params[:user][:email],
-         password: params[:user][:password],
-         image_name: 'sample.jpg')
-
-    if @user.save
-      session[:user_id] = @user.id
-      flash[:notice] = 'ユーザー登録が完了しました。'
-      redirect_to("/users/#{@user.id}")
-    else
-      render('users/new.html.erb')
-    end 
-  end
-
-  def edit
-    @user = User.find_by(id: params[:id])
-  end
-
-  def update
-    @user = User.find_by(id: params[:id])
-      
-    if params[:user][:image]
-      @user.image_name = "#{@user.id}.jpg" 
-      image = params[:user][:image]
-      File.binwrite("public/user_images/#{@user.image_name}", image.read)
-    end
-      
-    if @user.update(name: params[:user][:name], email: params[:user][:email], password: params[:user][:password])
-        flash[:notice] = "ユーザー情報を編集しました"
-        redirect_to("/users/#{@user.id}")
-    else
-        render('users/edit.html.erb')
-    end  
-  end
-
-  def login_form
-  end
-
-  def login
-    @user = User.find_by(email: params[:email])
-
-    if @user && @user.authenticate(params[:password])
-      session[:user_id] = @user.id
-      flash[:notice] = "ログインしました"
-      redirect_to("/users/#{@user.id}")
-    else
-      @error_message = "メールアドレスまたはパスワードが間違っています"
-      @email = params[:email]
-      @password = params[:password]
-      render('users/login_form.html.erb') 
-    end  
-  end
-
-  def logout
-    session[:user_id] = nil
-    flash[:notice] = "ログアウトしました"
-    redirect_to('/login')
-  end 
-   
   def likes
     @user = User.find_by(id: params[:id])
     @likes = Like.where(user_id: @user.id)
@@ -76,6 +11,5 @@ class UsersController < ApplicationController
   def wants
     @user = User.find_by(id: params[:id])
     @wants = Want.where(user_id: @user.id)
-  end
-    
+  end 
 end

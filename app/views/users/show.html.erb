@@ -1,27 +1,29 @@
 <div class="main">    
     <div class="container">
         <div class='user_show'>
-        <div class='user_image'>
-            <img src="<%= "/user_images/#{@user.image_name}" %>" width='200' height='150'>
-        </div>
+        <% if current_user&.image.present? %>
+          <div class='user_image'>
+              <img src=<%= current_user.image %> width='200' height='150'>
+          </div>
+        <% end %>
         <div class='user_info'>
-            <h2><%= @user.name %></h2>
-            <p><%= @user.email %></p>
-            <% if @user.id == @current_user.id %>
-            <p><%= link_to('編集', edit_user_path(@user.id)) %></p>
+            <h2><%= current_user.name %></h2>
+            <p><%= current_user.email %></p>
+            <% if current_user.id == params[:id].to_i %>
+              <p><%= link_to('編集', edit_user_registration_path) %></p>
             <% end %>
         </div>
 
             <ul class="user-tabs">
-            <li class="active"><%= link_to("投稿", "/users/#{@user.id}") %></li>
-            <li><%= link_to("いいね!", "/users/#{@user.id}/likes") %></li>
-            <li><%= link_to("買いたい！", "/users/#{@user.id}/wants") %></li>
+            <li class="active"><%= link_to("投稿", "/users/#{current_user.id}") %></li>
+            <li><%= link_to("いいね!", "/users/#{current_user.id}/likes") %></li>
+            <li><%= link_to("買いたい！", "/users/#{current_user.id}/wants") %></li>
             </ul>
 
-            <% @user.items.each do |item| %>
+            <% current_user.items.each do |item| %>
             <div class="items-index-content">
                 <div class="item-left">
-                <img src="<%= "/user_images/#{item.user.image_name}" %>">
+                <%# <img src="<%= "/user_images/#{item.user.image_name}" %>"> %>
                 </div>
                 <div class="item-right">
                 <div class="item-user-name">
